@@ -200,30 +200,30 @@ def triBulles(lst):
 
 
 def jeu() :
-    pass
+    jeu_complet = jeu_de_cartes()
+    global nom_joueur1
+    global nom_joueur2
+    nom_joueur1 = input("Tapez le nom du premier joueur : ")
+    nom_joueur2 = input("Tapez le nom du deuxième joueur : ")
+    jeu_joueur1 = distribution_jeu(jeu_complet, 26)
+    jeu_joueur2 = distribution_jeu(jeu_complet, 26)
 
-jeu_complet = jeu_de_cartes()
-global nom_joueur1
-global nom_joueur2
-nom_joueur1 = 'Logan' #input("Tapez le nom du premier joueur : ")
-nom_joueur2 = 'Elena' #input("Tapez le nom du deuxième joueur : ")
-jeu_joueur1 = distribution_jeu(jeu_complet, 26)
-jeu_joueur2 = distribution_jeu(jeu_complet, 26)
+    while jeu_joueur1 != [] or jeu_joueur2 != []:
+        #chercher vainqueur du tour ???
+        if jeu_joueur1==[] or jeu_joueur2==[]:
+            break
+        afficher_nombres_cartes(jeu_joueur1, jeu_joueur2, nom_joueur1, nom_joueur2)
+        afficher_carte(jeu_joueur1, jeu_joueur2)
+        gagnant = comparer_carte(jeu_joueur1[0], jeu_joueur2[0])
+        afficher_vainqueur_tour(gagnant, nom_joueur1, nom_joueur2)
+        print("")
+        gestion_tour(gagnant, jeu_joueur1, jeu_joueur2)
+        #time.sleep(1)
 
-while jeu_joueur1 != [] or jeu_joueur2 != []:
-    #chercher vainqueur du tour ???
-    if jeu_joueur1==[] or jeu_joueur2==[]:
-        break
-    afficher_nombres_cartes(jeu_joueur1, jeu_joueur2, nom_joueur1, nom_joueur2)
-    afficher_carte(jeu_joueur1, jeu_joueur2)
-    gagnant = comparer_carte(jeu_joueur1[0], jeu_joueur2[0])
-    afficher_vainqueur_tour(gagnant, nom_joueur1, nom_joueur2)
-    print("")
-    gestion_tour(gagnant, jeu_joueur1, jeu_joueur2)
-    #time.sleep(1)
+    if jeu_joueur1 == []:
+        gagnant = 'joueur2'
+    else:
+        gagnant = 'joueur1'
+    afficher_vainqueur_jeu(gagnant, jeu_joueur1, jeu_joueur2, nom_joueur1, nom_joueur2)
 
-if jeu_joueur1 == []:
-    gagnant = 'joueur2'
-else:
-    gagnant = 'joueur1'
-afficher_vainqueur_jeu(gagnant, jeu_joueur1, jeu_joueur2, nom_joueur1, nom_joueur2)
+jeu()
